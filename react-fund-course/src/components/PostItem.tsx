@@ -1,3 +1,6 @@
+import { IPostItem } from "../interfaces/PostItem";
+import MyButton from "./ui/button/MyButton";
+
 type Props = {
     post: {
         id: number;
@@ -5,9 +8,10 @@ type Props = {
         body: string;
     };
     number: number;
+    remove: (post: IPostItem)=>void;
 };
 
-const PostItem = ({post, number}: Props) => {
+const PostItem = ({post, number, remove}: Props) => {
   return (
     <div>
         <div className="post">
@@ -18,7 +22,9 @@ const PostItem = ({post, number}: Props) => {
                 </div>
             </div>
             <div className="post-btns">
-                <button>Delete</button>
+                <MyButton onClick={()=>remove(post)}>
+                    Delete
+                </MyButton>
             </div>
         </div>
     </div>
