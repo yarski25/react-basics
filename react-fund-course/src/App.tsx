@@ -16,29 +16,38 @@ function App() {
   ])
 
   const[title, setTitle] = useState('');
-
-  const bodyInputRef = useRef<HTMLInputElement>(null);
+  const[body, setBody] = useState('');
 
   // methods 
   const addNewPost = (e: React.MouseEvent<HTMLButtonElement>) =>{
     e.preventDefault();
-    console.log(title);
-    console.log(bodyInputRef.current?.value)
+    const newPost ={
+      id: Date.now(),
+      title,
+      body
+    }
+    setPosts([...posts, newPost]);
+    setTitle('');
+    setBody('');
   }
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>{
     setTitle(e.target.value);
+  }
+
+  const onChangeBody = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    setBody(e.target.value);
   }
 
   return (
     <div className="App">
       <form>
         <MyInput value={title}
-                 //onChange={ (e : React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-                 onChange={onChange}
+                 onChange={onChangeTitle}
                  type="text" 
                  placeholder='Название поста'/>
-        <MyInput ref={bodyInputRef}
+        <MyInput value={body}
+                 onChange={onChangeBody}
                  type="text"
                  placeholder='Описание поста'/>
         <MyButton onClick={addNewPost}>Создать пост</MyButton>
