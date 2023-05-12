@@ -6,6 +6,7 @@ import PostList from './components/PostList';
 import { IPostItem } from './interfaces/PostItem';
 import MyButton from './components/ui/button/MyButton';
 import MyInput from './components/ui/input/MyInput';
+import PostForm from './components/PostForm';
 
 function App() {
 
@@ -15,43 +16,15 @@ function App() {
     {id: 3, title: 'NodeJS', body: 'NodeJS - язык програмирования'}
   ])
 
-  const[title, setTitle] = useState('');
-  const[body, setBody] = useState('');
-
-  // methods 
-  const addNewPost = (e: React.MouseEvent<HTMLButtonElement>) =>{
-    e.preventDefault();
-    const newPost ={
-      id: Date.now(),
-      title,
-      body
-    }
-    setPosts([...posts, newPost]);
-    setTitle('');
-    setBody('');
+  // methods
+  const createPost = (newPost : IPostItem) =>{
+    setPosts([...posts, newPost])
   }
 
-  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>{
-    setTitle(e.target.value);
-  }
-
-  const onChangeBody = (e: React.ChangeEvent<HTMLInputElement>) =>{
-    setBody(e.target.value);
-  }
 
   return (
     <div className="App">
-      <form>
-        <MyInput value={title}
-                 onChange={onChangeTitle}
-                 type="text" 
-                 placeholder='Название поста'/>
-        <MyInput value={body}
-                 onChange={onChangeBody}
-                 type="text"
-                 placeholder='Описание поста'/>
-        <MyButton onClick={addNewPost}>Создать пост</MyButton>
-      </form>
+      <PostForm create={createPost} />
       <PostList posts={posts} title="Posts of JS"/>
     </div>
   );
