@@ -2,14 +2,15 @@ import { IPostItem } from '../interfaces/PostItem';
 import PostItem from './PostItem';
 
 type Props = {
-     posts: IPostItem[];
+     posts: IPostItem[],
+     title: string
 }
 
-const PostList = ({posts}: Props) => {
+const PostList = ({posts, title}: Props) => {
   return (
     <div>
         <h1 style={{textAlign: 'center'}}> 
-        List of posts
+        {title}
         </h1>
         {posts.map(post => <PostItem post={post} key={post.id}/>)}
     </div>
