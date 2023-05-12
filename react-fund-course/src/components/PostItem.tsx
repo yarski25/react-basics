@@ -4,14 +4,15 @@ type Props = {
         title: string;
         body: string;
     };
+    number: number;
 };
 
-const PostItem = ({post}: Props) => {
+const PostItem = ({post, number}: Props) => {
   return (
     <div>
         <div className="post">
             <div className="post-content">
-                <strong>{post.id}. {post.title}</strong>
+                <strong>{number}. {post.title}</strong>
                 <div>
                     {post.body}
                 </div>
