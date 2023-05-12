@@ -3,6 +3,8 @@ import styles from './MyButton.module.scss';
 
 type Props = {
     disabled?: boolean;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    //onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const MyButton = (props: PropsWithChildren<Props>) => {

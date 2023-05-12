@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './App.scss';
 import Counter from './components/Counter';
 import ClassCounter from './components/ClassCounter';
@@ -15,12 +15,33 @@ function App() {
     {id: 3, title: 'NodeJS', body: 'NodeJS - язык програмирования'}
   ])
 
+  const[title, setTitle] = useState('');
+
+  const bodyInputRef = useRef<HTMLInputElement>(null);
+
+  // methods 
+  const addNewPost = (e: React.MouseEvent<HTMLButtonElement>) =>{
+    e.preventDefault();
+    console.log(title);
+    console.log(bodyInputRef.current?.value)
+  }
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    setTitle(e.target.value);
+  }
+
   return (
     <div className="App">
       <form>
-        <MyInput type="text" placeholder='Название поста'/>
-        <MyInput type="text" placeholder='Описание поста'/>
-        <MyButton disabled={true}>Создать пост</MyButton>
+        <MyInput value={title}
+                 //onChange={ (e : React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+                 onChange={onChange}
+                 type="text" 
+                 placeholder='Название поста'/>
+        <MyInput ref={bodyInputRef}
+                 type="text"
+                 placeholder='Описание поста'/>
+        <MyButton onClick={addNewPost}>Создать пост</MyButton>
       </form>
       <PostList posts={posts} title="Posts of JS"/>
     </div>
