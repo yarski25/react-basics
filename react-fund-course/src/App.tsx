@@ -4,6 +4,7 @@ import Counter from './components/Counter';
 import ClassCounter from './components/ClassCounter';
 import PostList from './components/PostList';
 import { IPostItem } from './interfaces/PostItem';
+import MyButton from './components/ui/button/MyButton';
 
 function App() {
 
@@ -13,16 +14,14 @@ function App() {
     {id: 3, title: 'NodeJS', body: 'NodeJS - язык програмирования'}
   ])
 
-  const[posts2, setPosts2] = useState<IPostItem[]>([
-    {id: 1, title: 'Python', body: 'Python - язык програмирования'},
-    {id: 2, title: 'Python 2', body: 'Python 2 - язык програмирования'},
-    {id: 3, title: 'Python 3', body: 'Python 3 - язык програмирования'}
-  ])
-
   return (
     <div className="App">
+      <form>
+        <input type="text" placeholder='Название поста'/>
+        <input type="text" placeholder='Описание поста'/>
+        <MyButton disabled={true}>Создать пост</MyButton>
+      </form>
       <PostList posts={posts} title="Posts of JS"/>
-      <PostList posts={posts2} title="Posts of Python"/>
     </div>
   );
 }
