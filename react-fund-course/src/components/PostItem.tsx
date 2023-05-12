@@ -1,6 +1,4 @@
-import React from 'react'
-
-type MyProps = {
+type Props = {
     post: {
         id: number;
         title: string;
@@ -8,7 +6,7 @@ type MyProps = {
     };
 };
 
-const PostItem = ({post}: MyProps) => {
+const PostItem = ({post}: Props) => {
   return (
     <div>
         <div className="post">
