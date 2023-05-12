@@ -5,6 +5,7 @@ import ClassCounter from './components/ClassCounter';
 import PostList from './components/PostList';
 import { IPostItem } from './interfaces/PostItem';
 import MyButton from './components/ui/button/MyButton';
+import MyInput from './components/ui/input/MyInput';
 
 function App() {
 
@@ -17,8 +18,8 @@ function App() {
   return (
     <div className="App">
       <form>
-        <input type="text" placeholder='Название поста'/>
-        <input type="text" placeholder='Описание поста'/>
+        <MyInput type="text" placeholder='Название поста'/>
+        <MyInput type="text" placeholder='Описание поста'/>
         <MyButton disabled={true}>Создать пост</MyButton>
       </form>
       <PostList posts={posts} title="Posts of JS"/>
