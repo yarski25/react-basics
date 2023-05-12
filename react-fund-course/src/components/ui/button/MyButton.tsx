@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import styles from './MyButton.module.css';
+import styles from './MyButton.module.scss';
 
 type Props = {
     disabled?: boolean;
