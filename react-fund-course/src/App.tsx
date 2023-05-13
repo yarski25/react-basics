@@ -7,6 +7,7 @@ import { IPostItem } from './interfaces/PostItem';
 import MyButton from './components/ui/button/MyButton';
 import MyInput from './components/ui/input/MyInput';
 import PostForm from './components/PostForm';
+import MySelect from './components/ui/select/MySelect';
 
 function App() {
 
@@ -15,6 +16,8 @@ function App() {
     {id: 2, title: 'TypeScript', body: 'TypeScript - язык програмирования'},
     {id: 3, title: 'NodeJS', body: 'NodeJS - язык програмирования'}
   ])
+
+  const [selectedSort, setSelectedSort] = useState('');
 
   // methods
   const createPost = (newPost : IPostItem) =>{
@@ -25,9 +28,30 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id));
   }
 
+  // const sortPosts = (sort : string) =>{
+  //   setSelectedSort(sort);
+  //   console.log(sort);
+  // }
+
+  const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) =>{
+      const sort = e.target.value;
+      setSelectedSort(sort);
+      console.log(sort)
+  }
+
   return (
     <div className="App">
       <PostForm create={createPost} />
+      <hr style={{margin: '1em 0'}} />
+      <div>
+        <MySelect value={selectedSort}
+                  onChange={onChangeSelect}
+                  defaultValue='Сортировка'
+                  options={[
+                    {value: 'title', name: 'По названию'},
+                    {value: 'body', name: 'По описанию'}
+                  ]} />
+      </div>
       {posts.length !== 0
         ? <PostList remove={removePost} posts={posts} title="Posts of JS"/>
         : <h1 style={{textAlign: 'center'}}>Посты не найдены!</h1>
