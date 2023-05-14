@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import './App.scss';
 import Counter from './components/Counter';
 import ClassCounter from './components/ClassCounter';
@@ -8,6 +8,7 @@ import MyButton from './components/ui/button/MyButton';
 import MyInput from './components/ui/input/MyInput';
 import PostForm from './components/PostForm';
 import MySelect from './components/ui/select/MySelect';
+import PostFilter from './components/PostFilter';
 
 function App() {
 
@@ -17,8 +18,20 @@ function App() {
     {id: 3, title: 'NodeJS', body: 'KNodeJS - язык програмирования'}
   ])
 
-  const [selectedSort, setSelectedSort] = useState('');
-  const [searchedPost, setSearchedPost] = useState('');
+  const [filter, setFilter] = useState({sort: '', query: ''})
+
+  const sortedPosts = useMemo( () => {
+    console.log('getSortedPosts() called');
+    if(filter.sort){
+      return [...posts].sort((a: any , b: any) => a[filter.sort].localeCompare(b[filter.sort]));
+    }
+    return posts;
+  }, [filter.sort, posts]);
+
+  const sortedAndSearchedPosts = useMemo( () => {
+    console.log('sortedAndSearchedPosts called');
+    return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()));
+  }, [filter.query, sortedPosts]);
 
   // methods
   const createPost = (newPost : IPostItem) =>{
@@ -29,46 +42,14 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id));
   }
 
-  // const sortPosts = (sort : string) =>{
-  //   setSelectedSort(sort);
-  //   console.log(sort);
-  // }
-
-  const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) =>{
-    const sort = e.target.value;
-    setSelectedSort(sort);
-    setPosts([...posts].sort((a: any , b: any) => a[sort].localeCompare(b[sort])));
-  }
-
-  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) =>{
-    e.preventDefault();
-    const search = e.target.value;
-    setSearchedPost(search);
-  }
-
-  if (searchedPost.length > 0){
-    posts.filter((post) => {return post.title.match(searchedPost);});
-  }
-
   return (
     <div className="App">
       <PostForm create={createPost} />
       <hr style={{margin: '1em 0'}} />
-      <div>
-        <MySelect value={selectedSort}
-                  onChange={onChangeSelect}
-                  defaultValue='Сортировка'
-                  options={[
-                    {value: 'title', name: 'По названию'},
-                    {value: 'body', name: 'По описанию'}
-                  ]} />
-      </div>
-      <input type='search'
-             placeholder='search here'
-             onChange={onChangeSearch}
-             value={searchedPost} />
-      {posts.length !== 0
-        ? <PostList remove={removePost} posts={posts} title="Posts of JS"/>
+      <PostFilter filter={filter} 
+                  setFilter={setFilter}/>
+      {sortedAndSearchedPosts.length !== 0
+        ? <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Posts of JS"/>
         : <h1 style={{textAlign: 'center'}}>Посты не найдены!</h1>
       }
     </div>
