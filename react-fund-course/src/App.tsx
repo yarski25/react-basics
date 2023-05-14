@@ -12,9 +12,9 @@ import MySelect from './components/ui/select/MySelect';
 function App() {
 
   const[posts, setPosts] = useState<IPostItem[]>([
-    {id: 1, title: 'JavaScript', body: 'JavaScript - язык програмирования'},
-    {id: 2, title: 'TypeScript', body: 'TypeScript - язык програмирования'},
-    {id: 3, title: 'NodeJS', body: 'NodeJS - язык програмирования'}
+    {id: 1, title: 'JavaScript', body: 'BJavaScript - язык програмирования'},
+    {id: 2, title: 'TypeScript', body: 'ATypeScript - язык програмирования'},
+    {id: 3, title: 'NodeJS', body: 'KNodeJS - язык програмирования'}
   ])
 
   const [selectedSort, setSelectedSort] = useState('');
@@ -36,7 +36,7 @@ function App() {
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) =>{
       const sort = e.target.value;
       setSelectedSort(sort);
-      console.log(sort)
+      setPosts([...posts].sort((a: any , b: any) => a[sort].localeCompare(b[sort])));
   }
 
   return (
