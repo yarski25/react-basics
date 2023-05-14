@@ -9,6 +9,12 @@ type Props = {
 }
 
 const PostList = ({posts, title, number, remove}: Props) => {
+  
+  if(!posts.length){
+    return(<h1 style={{textAlign: 'center'}}>
+        Посты не найдены!</h1>)
+  }
+
   return (
     <div>
         <h1 style={{textAlign: 'center'}}> 

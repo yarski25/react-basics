@@ -9,6 +9,7 @@ import MyInput from './components/ui/input/MyInput';
 import PostForm from './components/PostForm';
 import MySelect from './components/ui/select/MySelect';
 import PostFilter from './components/PostFilter';
+import MyModal from './components/ui/modal/MyModal';
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
     {id: 3, title: 'NodeJS', body: 'KNodeJS - язык програмирования'}
   ])
 
-  const [filter, setFilter] = useState({sort: '', query: ''})
+  const [filter, setFilter] = useState({sort: '', query: ''});
+  const [modal, setModal] = useState(false);
 
   const sortedPosts = useMemo( () => {
     console.log('getSortedPosts() called');
@@ -36,6 +38,7 @@ function App() {
   // methods
   const createPost = (newPost : IPostItem) =>{
     setPosts([...posts, newPost]);
+    setModal(false);
   }
 
   const removePost = (post : IPostItem) =>{
@@ -44,14 +47,18 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost} />
+      <MyButton style={{marginTop: 30}} 
+                onClick={()=> setModal(true)}>
+        Создать пользователя
+      </MyButton>
+      <MyModal visible={modal}
+               setVisible={setModal}>
+        <PostForm create={createPost} />
+      </MyModal>
       <hr style={{margin: '1em 0'}} />
       <PostFilter filter={filter} 
                   setFilter={setFilter}/>
-      {sortedAndSearchedPosts.length !== 0
-        ? <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Posts of JS"/>
-        : <h1 style={{textAlign: 'center'}}>Посты не найдены!</h1>
-      }
+      <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Posts of JS"/>
     </div>
   );
 }

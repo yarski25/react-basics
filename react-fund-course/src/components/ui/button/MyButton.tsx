@@ -4,6 +4,7 @@ import styles from './MyButton.module.scss';
 type Props = {
     disabled?: boolean;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    style?: React.CSSProperties;
     //onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
