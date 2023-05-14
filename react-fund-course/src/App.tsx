@@ -18,6 +18,7 @@ function App() {
   ])
 
   const [selectedSort, setSelectedSort] = useState('');
+  const [searchedPost, setSearchedPost] = useState('');
 
   // methods
   const createPost = (newPost : IPostItem) =>{
@@ -34,9 +35,19 @@ function App() {
   // }
 
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) =>{
-      const sort = e.target.value;
-      setSelectedSort(sort);
-      setPosts([...posts].sort((a: any , b: any) => a[sort].localeCompare(b[sort])));
+    const sort = e.target.value;
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a: any , b: any) => a[sort].localeCompare(b[sort])));
+  }
+
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    e.preventDefault();
+    const search = e.target.value;
+    setSearchedPost(search);
+  }
+
+  if (searchedPost.length > 0){
+    posts.filter((post) => {return post.title.match(searchedPost);});
   }
 
   return (
@@ -52,6 +63,10 @@ function App() {
                     {value: 'body', name: 'По описанию'}
                   ]} />
       </div>
+      <input type='search'
+             placeholder='search here'
+             onChange={onChangeSearch}
+             value={searchedPost} />
       {posts.length !== 0
         ? <PostList remove={removePost} posts={posts} title="Posts of JS"/>
         : <h1 style={{textAlign: 'center'}}>Посты не найдены!</h1>
