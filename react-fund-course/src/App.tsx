@@ -11,6 +11,7 @@ import PostService from './api/PostService';
 import MyLoader from './components/ui/loader/MyLoader';
 import { useFetching } from './hooks/useFetching';
 import { getPageCount, getPagesArray } from './utils/pages';
+import MyPagination from './components/ui/pagination/MyPagination';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
-  let pagesArray = getPagesArray(totalPages);
+
 
   // hooks
 
@@ -79,17 +80,9 @@ function App() {
                        <MyLoader /></div>
         : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Posts of JS"/>
       }
-      <div className='page'>
-        {pagesArray.map( (p) => 
-            <span
-              onClick={() => changePage(p)} 
-              key={p}
-              className={page === p ? 'page__item page__item-current' : 'page__item'}>
-              {p}
-            </span>
-        )}
-      </div>
-      
+      <MyPagination page={page} 
+                    changePage={changePage} 
+                    totalPages={totalPages}/>
     </div>
   );
 }
