@@ -3,11 +3,6 @@ import MyInput from './ui/input/MyInput'
 import MyButton from './ui/button/MyButton'
 import { IPostItem } from '../interfaces/PostItem';
 
-interface IPost{
-    title: string;
-    body: string;
-}
-
 type Props = {
     create: (post: IPostItem)=>void
 }
