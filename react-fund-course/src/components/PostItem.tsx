@@ -16,7 +16,7 @@ const PostItem = ({post, number, remove}: Props) => {
     <div>
         <div className="post">
             <div className="post-content">
-                <strong>{number}. {post.title}</strong>
+                <strong>{post.id}. {post.title}</strong>
                 <div>
                     {post.body}
                 </div>
