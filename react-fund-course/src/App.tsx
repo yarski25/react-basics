@@ -23,7 +23,6 @@ function App() {
   const [modal, setModal] = useState(false);
 
   const sortedPosts = useMemo( () => {
-    console.log('getSortedPosts() called');
     if(filter.sort){
       return [...posts].sort((a: any , b: any) => a[filter.sort].localeCompare(b[filter.sort]));
     }
@@ -31,7 +30,6 @@ function App() {
   }, [filter.sort, posts]);
 
   const sortedAndSearchedPosts = useMemo( () => {
-    console.log('sortedAndSearchedPosts called');
     return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()));
   }, [filter.query, sortedPosts]);
 
