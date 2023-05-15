@@ -1,15 +1,14 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import Counter from './components/Counter';
 import ClassCounter from './components/ClassCounter';
 import PostList from './components/PostList';
 import { IPostItem } from './interfaces/PostItem';
 import MyButton from './components/ui/button/MyButton';
-import MyInput from './components/ui/input/MyInput';
 import PostForm from './components/PostForm';
-import MySelect from './components/ui/select/MySelect';
 import PostFilter from './components/PostFilter';
 import MyModal from './components/ui/modal/MyModal';
+import { usePosts } from './hooks/usePosts';
 
 function App() {
 
@@ -21,17 +20,7 @@ function App() {
 
   const [filter, setFilter] = useState({sort: '', query: ''});
   const [modal, setModal] = useState(false);
-
-  const sortedPosts = useMemo( () => {
-    if(filter.sort){
-      return [...posts].sort((a: any , b: any) => a[filter.sort].localeCompare(b[filter.sort]));
-    }
-    return posts;
-  }, [filter.sort, posts]);
-
-  const sortedAndSearchedPosts = useMemo( () => {
-    return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()));
-  }, [filter.query, sortedPosts]);
+  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
   // methods
   const createPost = (newPost : IPostItem) =>{
