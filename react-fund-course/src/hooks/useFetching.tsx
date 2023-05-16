@@ -5,7 +5,7 @@ export const useFetching = (callback: any) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const fetching = async (...args : [limit: number, page: number]) => {
+    const fetching = async (...args : [limit?: number, page?: number]) => {
         try{
             setIsLoading(true);
             await callback(...args);

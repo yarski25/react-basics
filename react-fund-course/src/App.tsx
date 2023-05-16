@@ -1,10 +1,8 @@
 import React from 'react'
 import './App.scss';
-import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
-import About from './pages/About';
-import Posts from './pages/Posts';
+import { BrowserRouter } from 'react-router-dom';
 import MyNavbar from './components/ui/navbar/MyNavbar';
-import ErrorPage from './pages/ErrorPage';
+import AppRouter from './components/AppRouter';
 
 type Props = {}
 
@@ -12,12 +10,7 @@ function App({}: Props) {
   return (
     <BrowserRouter>
       <MyNavbar />
-      <Routes>
-        <Route path="/about" element={<About />}/>
-        <Route path="/posts" element={<Posts />}/>
-        <Route path="/error" element={<ErrorPage />}/>
-        <Route path="*" element={<Navigate to='/error' />}/>
-      </Routes>
+      <AppRouter />
     </BrowserRouter>
   )
 }
