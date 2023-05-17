@@ -1,17 +1,17 @@
 import { SetStateAction, createContext } from "react";
 
-export interface AuthContextInterface {
+interface IAuthContext {
     isAuth: boolean;
-    //setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-    //setIsAuth: React.Dispatch<SetStateAction<boolean>>;
-
+    setIsAuth: React.Dispatch<SetStateAction<boolean>>;
+    isLoading: boolean;
   }
 
-  export const authContextDefaults: AuthContextInterface = {
+  export const authContextDefaults: IAuthContext = {
     isAuth: false,
-    //setIsAuth: React.Dispatch<SetStateAction<boolean>>(false);
+    setIsAuth: () => false,
+    isLoading: true
   };
 
-export const AuthContext = createContext<AuthContextInterface>(
+export const AuthContext = createContext<IAuthContext>(
     authContextDefaults
 );

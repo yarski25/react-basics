@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import About from '../pages/About'
 import Posts from '../pages/Posts'
 import ErrorPage from '../pages/ErrorPage'
 import PostPage from '../pages/PostPage'
 import Login from '../pages/Login'
+import { AuthContext } from '../context'
+import MyLoader from './ui/loader/MyLoader'
 
 type Props = {}
 
 const AppRouter = (props: Props) => {
-    const isAuth = false;
 
+    const {isAuth, isLoading} = useContext(AuthContext);
+    console.log(isAuth);
+
+    if(isLoading){
+        return <MyLoader />
+    }
   return (
     isAuth 
         ?
