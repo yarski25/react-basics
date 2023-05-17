@@ -13,10 +13,9 @@ type Props = {}
 const AppRouter = (props: Props) => {
 
     const {isAuth, isLoading} = useContext(AuthContext);
-    console.log(isAuth);
-
+    
     if(isLoading){
-        return <MyLoader />
+        return <MyLoader/>
     }
   return (
     isAuth 
