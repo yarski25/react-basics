@@ -2,14 +2,14 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { IPostItem } from '../interfaces/PostItem';
 import PostItem from './PostItem';
 
-type Props = {
+type PostListProps = {
      posts: IPostItem[],
      title: string,
      number?: number,
      remove: (post: IPostItem) => void
 }
 
-const PostList = ({posts, title, number, remove}: Props) => {
+const PostList = ({posts, title, number, remove}: PostListProps) => {
   
   if(!posts.length){
     return(<h1 style={{textAlign: 'center'}}>

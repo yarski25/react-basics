@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import './App.scss';
-import { BrowserRouter, useRoutes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import MyNavbar from './components/ui/navbar/MyNavbar';
 import AppRouter from './components/AppRouter';
-import { routesConfig } from './router';
 import { AuthContext } from './context';
 
-type Props = {}
+type AppProps = {}
 
-function App({}: Props) {
-  const [isAuth, setIsAuth] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+function App({}: AppProps) {
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect( () => {
     if(localStorage.getItem('auth')){
       setIsAuth(true);
     }
     setIsLoading(false);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

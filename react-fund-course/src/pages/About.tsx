@@ -1,8 +1,8 @@
 import React from 'react'
 
-type Props = {}
+type AboutProps = {}
 
-const About = (props: Props) => {
+const About = (props: AboutProps) => {
   return (
     <h1>This app is created for learning purposes</h1>
   )

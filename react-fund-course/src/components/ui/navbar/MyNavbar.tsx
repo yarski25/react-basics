@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import MyButton from '../button/MyButton'
 import { AuthContext } from '../../../context'
 
-type Props = {}
+type MyNavbarProps = {}
 
-const MyNavbar = (props: Props) => {
+const MyNavbar = (props: MyNavbarProps) => {
 
-    const {isAuth, setIsAuth} = useContext(AuthContext);
+    const {setIsAuth} = useContext(AuthContext);
 
     const logout = () => {
         setIsAuth(false);

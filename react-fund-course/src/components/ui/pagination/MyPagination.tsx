@@ -1,13 +1,13 @@
 import React from 'react'
 import { getPagesArray } from '../../../utils/pages';
 
-type Props = {
+type MyPaginationProps = {
     totalPages: number;
     page: number;
     changePage: (page: number) => void;
 }
 
-const MyPagination = (props: Props) => {
+const MyPagination = (props: MyPaginationProps) => {
   let pagesArray = getPagesArray(props.totalPages);
   return (
     <div className='page'>

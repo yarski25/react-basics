@@ -1,12 +1,12 @@
 import React, { PropsWithChildren } from 'react'
 import styles from './MyModal.module.scss'
 
-type Props = {
+type MyModalProps = {
     visible: boolean;
     setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MyModal = (props : PropsWithChildren<Props>) => {
+const MyModal = (props : PropsWithChildren<MyModalProps>) => {
 
     const rootStyles = [styles.myModal];
     if(props.visible) {

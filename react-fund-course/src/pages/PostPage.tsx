@@ -6,31 +6,37 @@ import { IPostItem } from '../interfaces/PostItem';
 import MyLoader from '../components/ui/loader/MyLoader';
 import { IPostComments } from '../interfaces/PostComments';
 
-type Props = {}
+type PostPageProps = {}
 
-const PostPage = (props: Props) => {
-    const params = useParams();
+type PostPageParams = {
+    id: string;
+}
+
+const PostPage = (props: PostPageProps) => {
+    const {id} = useParams<PostPageParams>();
     const [post, setPost] = useState<IPostItem>();
     const [comments, setComments] = useState<IPostComments[]>();
 
-    const [fetchPostById, isLoading, error] = useFetching( async (id: number) => {
+    const [fetchPostById, isLoading] = useFetching( async (id: number) => {
         const response = await PostService.getById(id);
         setPost(response.data);
     })
 
-    const [fetchCommmentsByPostId, isComLoading, comError] = useFetching( async (id: number) => {
+    const [fetchCommmentsByPostId, isComLoading] = useFetching( async (id: number) => {
         const response = await PostService.getCommentsByPostId(id);
         setComments(response.data);
     })
 
 
     useEffect(() => {
-        fetchPostById(Number(params.id));
-        fetchCommmentsByPostId(Number(params.id));
+        fetchPostById(Number(id));
+        fetchCommmentsByPostId(Number(id));
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
   return (
     <div>
-        <h1>Вы открыли страницу поста с ID = {params.id}</h1>
+        <h1>Вы открыли страницу поста с ID = {id}</h1>
         {isLoading
             ? <MyLoader />
             : <div>{post?.id} {post?.title}</div>

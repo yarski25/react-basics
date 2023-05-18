@@ -3,13 +3,13 @@ import MyInput from './ui/input/MyInput'
 import MyButton from './ui/button/MyButton'
 import { IPostItem } from '../interfaces/PostItem';
 
-type Props = {
+type PostFormProps = {
     create: (post: IPostItem)=>void
 }
 
-const PostForm = ({create}: Props) => {
+const PostForm = ({create}: PostFormProps) => {
 
-    const[post, setPost] = useState({title: '', body: ''});
+    const[post, setPost] = useState({userId: 0, title: '', body: ''});
 
     const addNewPost = (e: React.MouseEvent<HTMLButtonElement>) =>{
         e.preventDefault();
@@ -17,7 +17,7 @@ const PostForm = ({create}: Props) => {
             ...post, id: Date.now()
         }
         create(newPost);
-        setPost({title: '', body: ''})
+        setPost({userId: 0, title: '', body: ''})
       }
 
     const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>{

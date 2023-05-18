@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './MyInput.module.scss'
 
-type Props = {
+type MyInputProps = {
     value?: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     type?: string;
@@ -11,7 +11,7 @@ type Props = {
 
 type Ref = HTMLInputElement;
 
-const MyInput = React.forwardRef<Ref, Props>( (props : Props, ref) => {
+const MyInput = React.forwardRef<Ref, MyInputProps>( (props : MyInputProps, ref) => {
   return (
     <input ref={ref} {...props} className={styles.myInput} />
   )

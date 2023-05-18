@@ -1,18 +1,16 @@
 import React from 'react'
 import MyInput from './ui/input/MyInput'
 import MySelect from './ui/select/MySelect'
+import { IFilter } from '../interfaces/Filter';
 
-interface IFilter {
-    sort: string;
-    query: string;
-}
 
-type Props = {
+
+type PostFilterProps = {
     filter: IFilter;
     setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
 }
 
-const PostFilter = ({filter, setFilter} : Props) => {
+const PostFilter = ({filter, setFilter} : PostFilterProps) => {
 
     const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) =>{
         const sort = e.target.value;

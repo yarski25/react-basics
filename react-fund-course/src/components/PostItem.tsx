@@ -2,17 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { IPostItem } from "../interfaces/PostItem";
 import MyButton from "./ui/button/MyButton";
 
-type Props = {
-    post: {
-        id: number;
-        title: string;
-        body: string;
-    };
+type PostItemProps = {
+    post: IPostItem;
     number: number;
     remove: (post: IPostItem)=>void;
 };
 
-const PostItem = ({post, number, remove}: Props) => {
+const PostItem = ({post, number, remove}: PostItemProps) => {
     const router = useNavigate();
 
   return (

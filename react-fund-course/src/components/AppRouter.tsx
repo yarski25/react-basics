@@ -2,15 +2,14 @@ import React, { useContext } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import About from '../pages/About'
 import Posts from '../pages/Posts'
-import ErrorPage from '../pages/ErrorPage'
 import PostPage from '../pages/PostPage'
 import Login from '../pages/Login'
 import { AuthContext } from '../context'
 import MyLoader from './ui/loader/MyLoader'
 
-type Props = {}
+type AppRouterProps = {}
 
-const AppRouter = (props: Props) => {
+const AppRouter = (props: AppRouterProps) => {
 
     const {isAuth, isLoading} = useContext(AuthContext);
     

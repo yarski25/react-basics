@@ -3,11 +3,11 @@ import MyInput from '../components/ui/input/MyInput'
 import MyButton from '../components/ui/button/MyButton'
 import { AuthContext } from '../context'
 
-type Props = {}
+type LoginProps = {}
 
-const Login = (props: Props) => {
+const Login = (props: LoginProps) => {
 
-    const {isAuth, setIsAuth} = useContext(AuthContext);
+    const {setIsAuth} = useContext(AuthContext);
 
     const login = (e : React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();

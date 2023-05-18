@@ -1,12 +1,12 @@
 import React from 'react'
 
-type SelectOption = {
+type MySelectOption = {
     name: string;
     value: string;
 }
 
-type Props = {
-    options: SelectOption[];
+type MySelectProps = {
+    options: MySelectOption[];
     defaultValue: string;
     value?: string;
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -22,7 +22,7 @@ type Props = {
 // }
 
 
-const MySelect = ({options, defaultValue, value, onChange} : Props) => {
+const MySelect = ({options, defaultValue, value, onChange} : MySelectProps) => {
   return (
     <select value={value}
             onChange={onChange}>
