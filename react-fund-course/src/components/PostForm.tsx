@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import MyInput from './ui/input/MyInput'
 import MyButton from './ui/button/MyButton'
-import { IPostItem } from '../interfaces/PostItem';
+import { IPostItem } from '../types/interfaces/PostItem';
 
 type PostFormProps = {
     create: (post: IPostItem)=>void

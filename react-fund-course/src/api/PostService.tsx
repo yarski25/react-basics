@@ -1,6 +1,6 @@
 import axios from "axios";
-import { IPostItem } from "../interfaces/PostItem";
-import { IPostComments } from "../interfaces/PostComments";
+import { IPostItem } from "../types/interfaces/PostItem";
+import { IPostComments } from "../types/interfaces/PostComments";
 
 export default class PostService{
     static async getAll(limit: number = 10, page: number = 1){

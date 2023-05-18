@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { IPostItem } from "../interfaces/PostItem";
+import { IPostItem } from "../types/interfaces/PostItem";
 
 export const useSortedPosts = (posts : IPostItem[], sort: string) => {
     const sortedPosts = useMemo( () => {

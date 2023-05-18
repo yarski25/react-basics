@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../App.scss';
-import { IPostItem } from '../interfaces/PostItem';
+import { IPostItem } from '../types/interfaces/PostItem';
 import { usePosts } from '../hooks/usePosts';
 import { useFetching } from '../hooks/useFetching';
 import PostService from '../api/PostService';
@@ -12,7 +12,7 @@ import PostFilter from '../components/PostFilter';
 import MyLoader from '../components/ui/loader/MyLoader';
 import PostList from '../components/PostList';
 import MyPagination from '../components/ui/pagination/MyPagination';
-import { IFilter } from '../interfaces/Filter';
+import { IFilter } from '../types/interfaces/Filter';
 
 function Posts() {
 

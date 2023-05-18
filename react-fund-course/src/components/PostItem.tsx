@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { IPostItem } from "../interfaces/PostItem";
+import { IPostItem } from "../types/interfaces/PostItem";
 import MyButton from "./ui/button/MyButton";
 
 type PostItemProps = {

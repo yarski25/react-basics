@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFetching } from '../hooks/useFetching';
 import PostService from '../api/PostService';
-import { IPostItem } from '../interfaces/PostItem';
+import { IPostItem } from '../types/interfaces/PostItem';
 import MyLoader from '../components/ui/loader/MyLoader';
-import { IPostComments } from '../interfaces/PostComments';
+import { IPostComments } from '../types/interfaces/PostComments';
 
 type PostPageProps = {}
 
@@ -31,7 +31,7 @@ const PostPage = (props: PostPageProps) => {
     useEffect(() => {
         fetchPostById(Number(id));
         fetchCommmentsByPostId(Number(id));
-        
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
   return (

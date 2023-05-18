@@ -1,5 +1,5 @@
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { IPostItem } from '../interfaces/PostItem';
+import { IPostItem } from '../types/interfaces/PostItem';
 import PostItem from './PostItem';
 
 type PostListProps = {
