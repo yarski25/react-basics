@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import MyNavbar from './components/ui/navbar/MyNavbar';
 import AppRouter from './components/AppRouter';
 import { AuthContext } from './context';
+import UserList from './components/UserList';
 
 function App() {
   const [isAuth, setIsAuth] = useState<boolean>(false);
@@ -20,6 +21,7 @@ function App() {
     <AuthContext.Provider value={{ isAuth, setIsAuth, isLoading }}>
       <BrowserRouter>
         <MyNavbar />
+        <UserList />
         <AppRouter />
       </BrowserRouter>
     </AuthContext.Provider>
