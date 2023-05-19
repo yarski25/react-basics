@@ -7,7 +7,7 @@ type MyPaginationProps = {
 }
 
 const MyPagination = (props: MyPaginationProps) => {
-  let pagesArray = getPagesArray(props.totalPages);
+  const pagesArray = getPagesArray(props.totalPages);
   return (
     <div className='page'>
         {pagesArray.map( (p) => 

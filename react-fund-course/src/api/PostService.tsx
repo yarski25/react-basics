@@ -3,7 +3,7 @@ import { IPostItem } from "../types/interfaces/PostItem";
 import { IPostComments } from "../types/interfaces/PostComments";
 
 export default class PostService{
-    static async getAll(limit: number = 10, page: number = 1){
+    static async getAll(limit: number, page: number){
         const response = await axios.get<IPostItem[]>('https://jsonplaceholder.typicode.com/posts',{
             params: {
                 _limit: limit,

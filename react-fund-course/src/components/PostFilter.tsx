@@ -3,8 +3,6 @@ import MyInput from './ui/input/MyInput'
 import MySelect from './ui/select/MySelect'
 import { IFilter } from '../types/interfaces/Filter';
 
-
-
 type PostFilterProps = {
     filter: IFilter;
     setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
