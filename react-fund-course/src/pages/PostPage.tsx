@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFetching } from '../hooks/useFetching';
 import PostService from '../api/PostService';
@@ -6,13 +6,11 @@ import { IPostItem } from '../types/interfaces/PostItem';
 import MyLoader from '../components/ui/loader/MyLoader';
 import { IPostComments } from '../types/interfaces/PostComments';
 
-type PostPageProps = {}
-
 type PostPageParams = {
     id: string;
 }
 
-const PostPage = (props: PostPageProps) => {
+const PostPage = () => {
     const {id} = useParams<PostPageParams>();
     const [post, setPost] = useState<IPostItem>();
     const [comments, setComments] = useState<IPostComments[]>();

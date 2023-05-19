@@ -9,7 +9,7 @@ type PostListProps = {
      remove: (post: IPostItem) => void
 }
 
-const PostList = ({posts, title, number, remove}: PostListProps) => {
+const PostList = ({posts, title, remove}: PostListProps) => {
   
   if(!posts.length){
     return(<h1 style={{textAlign: 'center'}}>

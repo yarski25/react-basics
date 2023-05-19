@@ -1,4 +1,3 @@
-import React from 'react'
 import { getPagesArray } from '../../../utils/pages';
 
 type MyPaginationProps = {

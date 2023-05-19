@@ -1,8 +1,5 @@
-import React from 'react'
 
-type ErrorPageProps = {}
-
-const ErrorPage = (props: ErrorPageProps) => {
+const ErrorPage = () => {
   return (
     <h1 style={{color: 'red'}}>
         Page not exists!

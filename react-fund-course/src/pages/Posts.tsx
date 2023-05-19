@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../App.scss';
 import { IPostItem } from '../types/interfaces/PostItem';
 import { usePosts } from '../hooks/usePosts';

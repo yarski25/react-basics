@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import MyButton from '../button/MyButton'
 import { AuthContext } from '../../../context'
 
-type MyNavbarProps = {}
-
-const MyNavbar = (props: MyNavbarProps) => {
+const MyNavbar = () => {
 
     const {setIsAuth} = useContext(AuthContext);
 

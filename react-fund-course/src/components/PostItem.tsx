@@ -8,7 +8,7 @@ type PostItemProps = {
     remove: (post: IPostItem)=>void;
 };
 
-const PostItem = ({post, number, remove}: PostItemProps) => {
+const PostItem = ({post, remove}: PostItemProps) => {
     const router = useNavigate();
 
   return (
