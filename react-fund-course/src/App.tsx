@@ -4,11 +4,21 @@ import { BrowserRouter } from 'react-router-dom';
 import MyNavbar from './components/ui/navbar/MyNavbar';
 import AppRouter from './components/AppRouter';
 import { AuthContext } from './context';
-import UserList from './components/UserList';
+import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { fetchUsers } from './store/reducers/ActionCreators';
 
 function App() {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const dispatch = useAppDispatch();
+  const { users, isUsersLoading, error } = useAppSelector(
+    (state) => state.userReducer,
+  );
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem('auth')) {
@@ -21,7 +31,9 @@ function App() {
     <AuthContext.Provider value={{ isAuth, setIsAuth, isLoading }}>
       <BrowserRouter>
         <MyNavbar />
-        <UserList />
+        {isUsersLoading && <h1>Loading...</h1>}
+        {error && <h1>{error}</h1>}
+        {JSON.stringify(users, null, 2)}
         <AppRouter />
       </BrowserRouter>
     </AuthContext.Provider>
