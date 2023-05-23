@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "name": "userX",
+      "name": "user 1",
       "email": "user1@email.com"
     },
     {
@@ -49,11 +49,6 @@
       "id": 10,
       "name": "user 10",
       "email": "user10@email.com"
-    },
-    {
-      "name": "user12",
-      "email": "user12",
-      "id": 11
     }
   ]
 }

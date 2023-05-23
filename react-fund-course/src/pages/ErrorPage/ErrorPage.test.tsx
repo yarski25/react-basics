@@ -18,4 +18,10 @@ describe('ErrorPage tests', () => {
     const h1 = getByRole('heading', { level: 1 });
     expect(h1).toHaveTextContent('Page not exists!');
   });
+
+  it('should render h1 styled with red text color', () => {
+    const { getByRole } = render(<ErrorPage />);
+    const h1 = getByRole('heading', { level: 1 });
+    expect(h1).toHaveStyle('color: red');
+  });
 });
