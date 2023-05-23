@@ -16,6 +16,7 @@ const Login = () => {
     <div>
       <h1>Login page</h1>
       <form
+        name='login'
         action=''
         onSubmit={login}
       >
