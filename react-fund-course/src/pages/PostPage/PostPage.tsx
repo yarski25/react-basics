@@ -20,12 +20,10 @@ const PostPage = () => {
     setPost(response.data);
   });
 
-  const [fetchCommmentsByPostId, isComLoading] = useFetching(
-    async (id: number) => {
-      const response = await PostService.getCommentsByPostId(id);
-      setComments(response.data);
-    },
-  );
+  const [fetchCommmentsByPostId, isComLoading] = useFetching(async (id: number) => {
+    const response = await PostService.getCommentsByPostId(id);
+    setComments(response.data);
+  });
 
   useEffect(() => {
     fetchPostById(Number(id));
@@ -35,15 +33,15 @@ const PostPage = () => {
   }, []);
   return (
     <div>
-      <h1>Вы открыли страницу поста с ID = {id}</h1>
+      <h1 data-testid='post-h1'>Вы открыли страницу поста с ID = {id}</h1>
       {isLoading ? (
         <MyLoader />
       ) : (
-        <div>
+        <div data-testid='post-div'>
           {post?.id} {post?.title}
         </div>
       )}
-      <h1>Комментарии</h1>
+      <h1 data-testid='comments-h1'>Комментарии</h1>
       {isComLoading ? (
         <MyLoader />
       ) : (
@@ -52,6 +50,7 @@ const PostPage = () => {
             <div
               key={comment.id}
               style={{ marginTop: '15px' }}
+              data-testid='comment-div'
             >
               <h5>{comment.email}</h5>
               <div>{comment.body}</div>
