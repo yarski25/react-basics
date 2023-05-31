@@ -32,7 +32,7 @@ const UsersList = () => {
     <div>
       <div className='user__list'>
         <button onClick={handleCreate}>Add new post</button>
-        {isLoading && <h1>Loading...</h1>}
+        {isLoading && <h1 data-testid='users-loading'>Loading...</h1>}
         {error && <h1>Error occured...</h1>}
         {users?.map((user) => (
           <UserItem

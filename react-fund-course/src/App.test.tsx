@@ -1,126 +1,125 @@
-import { act, screen } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 //import { AuthContext } from './context';
 import App from './App';
 import { renderWithProviders } from './utils/test-utils';
+import { server } from './mock/api/server';
+import { rest } from 'msw';
 
 // import { Provider } from 'react-redux'
 // import configureStore from 'redux-mock-store'
 
+// const apiData = [
+//   {
+//     users: [
+//       {
+//         id: 1,
+//         name: 'user 1',
+//         email: 'user1@email.com',
+//       },
+//       {
+//         id: 2,
+//         name: 'user 2',
+//         email: 'user2@email.com',
+//       },
+//       {
+//         id: 3,
+//         name: 'user 3',
+//         email: 'user3@email.com',
+//       },
+//     ],
+//   },
+// ];
+
+// test('table should render after fetching from API depending on request Query parameters', async () => {
+//   // custom msw server
+//   server.use(
+//     rest.get(`*`, (req, res, ctx) => {
+//       const arg = req.url.searchParams.getAll('page');
+//       console.log(arg);
+//       return res(ctx.json(apiData));
+//     }),
+//   );
+
+//   // specify table as the render container
+//   const table = document.createElement('table');
+
+//   // wrap component with custom render function
+//   const { container } = renderWithProviders(<App />, {
+//     container: document.body.appendChild(table),
+//   });
+
+//   const allRows = await screen.findAllByRole('row');
+
+//   await waitFor(() => {
+//     expect(container).toBeInTheDocument();
+//   });
+
+//   await waitFor(() => {
+//     expect(allRows.length).toBe(10);
+//   });
+// });
+
 describe('App', () => {
-  it('handles good response', async () => {
-    await act(async () => {
-      renderWithProviders(<App />);
+  it('displays the list of recent users', async () => {
+    renderWithProviders(<App />);
+
+    // first Loading...
+    expect(screen.getByTestId('users-loading')).toBeInTheDocument();
+
+    // after success fetching users expected
+    await waitFor(() => {
+      const users = screen.getAllByTestId('user-item');
+      expect(users).toHaveLength(10);
     });
-
-    //screen.debug();
-
-    screen.getByText('Loading...');
-
-    // await screen.findByRole('heading', { name: /bulbasaur/i });
-
-    // const img = screen.getByRole('img', {
-    //   name: /bulbasaur/i,
-    // }) as HTMLImageElement;
-
-    // expect(img.src).toBe(
-    //   'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png',
-    // );
   });
 
-  // it('handles error response', async () => {
-  //   // force msw to return error response
-  //   server.use(
-  //     rest.get(
-  //       'https://pokeapi.co/api/v2/pokemon/bulbasaur',
-  //       (req, res, ctx) => {
-  //         return res(ctx.status(500))
-  //       }
-  //     )
-  //   )
+  // it('should render App', async () => {
+  //   const authValue = {
+  //     isAuth: false,
+  //     setIsAuth: () => false,
+  //     isLoading: true,
+  //   };
 
-  //   renderWithProviders(<App />)
+  //   //const { container } = render(<MyNavbar />);
+  //   await act(async () => {
+  //     renderWithProviders(
+  //       <AuthContext.Provider value={authValue}>
+  //         <App />
+  //       </AuthContext.Provider>,
+  //     );
+  //   });
+  //   //sexpect(container).toBeInTheDocument();
+  // });
 
-  //   screen.getByText('Loading...')
+  // it('should render h1 post header', async () => {
+  //   //render(<PostPage />);
+  //   await act(async () => {
+  //     render(<PostPage />, container);
+  //   });
+  //   expect(screen.getByTestId('post-h1')).toBeInTheDocument();
+  // });
 
-  //   await screen.findByText('Oh no, there was an error')
-  // })
+  // it('should render h1 comments header', async () => {
+  //   //render(<PostPage />);
+  //   await act(async () => {
+  //     render(<PostPage />, container);
+  //   });
+  //   expect(screen.getByTestId('comments-h1')).toBeInTheDocument();
+  // });
+
+  // it('should render h1 post header with defined text context', async () => {
+  //   //render(<PostPage />);
+  //   await act(async () => {
+  //     render(<PostPage />, container);
+  //   });
+  //   expect(screen.getByTestId('post-h1')).toHaveTextContent('Вы открыли страницу поста с ID =');
+  // });
+
+  // it('should render h1 comments header with defined text context', async () => {
+  //   //render(<PostPage />);
+  //   await act(async () => {
+  //     render(<PostPage />, container);
+  //   });
+  //   expect(screen.getByTestId('comments-h1')).toHaveTextContent('Комментарии');
+  // });
 });
-
-// describe('With React Testing Library', () => {
-//   const initialState = {output:10}
-//   const mockStore = configureStore()
-//   let store,wrapper
-
-//   it('Shows "Hello world!"', () => {
-//     store = mockStore(initialState)
-//     const { getByText } = render(<Provider store={store}><App /></Provider>)
-
-//     expect(getByText('Hello Worldd!')).not.toBeNull()
-//   })
-// })
-
-// describe('Navbar tests', () => {
-//   // let container: any = null;
-//   // beforeEach(() => {
-//   //   // setup a DOM element as a render target
-//   //   container = document.createElement('div');
-//   //   document.body.appendChild(container);
-//   // });
-
-//   // afterEach(() => {
-//   //   // cleanup on exiting
-//   //   unmountComponentAtNode(container);
-//   //   container.remove();
-//   //   container = null;
-//   // });
-
-//   it('should render App', async () => {
-//     const authValue = {
-//       isAuth: false,
-//       setIsAuth: () => false,
-//       isLoading: true,
-//     };
-
-//     //const { container } = render(<MyNavbar />);
-//     await act(async () => {
-//       render(
-//         <AuthContext.Provider value={authValue}>
-//           <App />
-//         </AuthContext.Provider>,
-//       );
-//     });
-//     //sexpect(container).toBeInTheDocument();
-//   });
-
-// it('should render h1 post header', async () => {
-//   //render(<PostPage />);
-//   await act(async () => {
-//     render(<PostPage />, container);
-//   });
-//   expect(screen.getByTestId('post-h1')).toBeInTheDocument();
-// });
-
-// it('should render h1 comments header', async () => {
-//   //render(<PostPage />);
-//   await act(async () => {
-//     render(<PostPage />, container);
-//   });
-//   expect(screen.getByTestId('comments-h1')).toBeInTheDocument();
-// });
-
-// it('should render h1 post header with defined text context', async () => {
-//   //render(<PostPage />);
-//   await act(async () => {
-//     render(<PostPage />, container);
-//   });
-//   expect(screen.getByTestId('post-h1')).toHaveTextContent('Вы открыли страницу поста с ID =');
-// });
-
-// it('should render h1 comments header with defined text context', async () => {
-//   //render(<PostPage />);
-//   await act(async () => {
-//     render(<PostPage />, container);
-//   });
-//   expect(screen.getByTestId('comments-h1')).toHaveTextContent('Комментарии');
-// });
-// });

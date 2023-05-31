@@ -19,6 +19,7 @@ const UserItem = ({ user, update, remove }: UserItemProps) => {
 
   return (
     <div
+      data-testid='user-item'
       className='user'
       onClick={handleUpdate}
     >
