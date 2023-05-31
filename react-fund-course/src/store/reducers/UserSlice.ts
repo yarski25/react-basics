@@ -31,20 +31,35 @@ export const userSlice = createSlice({
       state.error = action.payload;
     },
   },
-  extraReducers: {
-    [fetchUsers.fulfilled.type]: (state, action: PayloadAction<IUser[]>) => {
-      state.isUsersLoading = false;
-      state.error = '';
-      state.users = action.payload;
-    },
-    [fetchUsers.pending.type]: (state) => {
-      state.isUsersLoading = true;
-    },
-    [fetchUsers.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isUsersLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUsers.fulfilled.type, (state, action: PayloadAction<IUser[]>) => {
+        state.isUsersLoading = false;
+        state.error = '';
+        state.users = action.payload;
+      })
+      .addCase(fetchUsers.pending.type, (state) => {
+        state.isUsersLoading = true;
+      })
+      .addCase(fetchUsers.rejected.type, (state, action: PayloadAction<string>) => {
+        state.isUsersLoading = false;
+        state.error = action.payload;
+      });
   },
+  // extraReducers: {
+  //   [fetchUsers.fulfilled.type]: (state, action: PayloadAction<IUser[]>) => {
+  //     state.isUsersLoading = false;
+  //     state.error = '';
+  //     state.users = action.payload;
+  //   },
+  //   [fetchUsers.pending.type]: (state) => {
+  //     state.isUsersLoading = true;
+  //   },
+  //   [fetchUsers.rejected.type]: (state, action: PayloadAction<string>) => {
+  //     state.isUsersLoading = false;
+  //     state.error = action.payload;
+  //   },
+  // },
 });
 
 export default userSlice.reducer;

@@ -1,0 +1,39 @@
+// import { rest } from 'msw';
+// import App from '../App';
+// import { server } from '../mock/api/server';
+// import { renderWithProviders } from '../utils/test-utils';
+// import { screen, waitFor } from '@testing-library/react';
+
+// const apiData = [
+//   { name: 'Mark Zuckerberg', age: '34' },
+//   { name: 'Elon Musk', age: '44' },
+// ];
+
+// test('table should render after fetching from API depending on request Query parameters', async () => {
+//   // custom msw server
+//   server.use(
+//     rest.get(`*`, (req, res, ctx) => {
+//       const arg = req.url.searchParams.getAll('page');
+//       console.log(arg);
+//       return res(ctx.json(apiData));
+//     }),
+//   );
+
+//   // specify table as the render container
+//   const table = document.createElement('table');
+
+//   // wrap component with custom render function
+//   const { container } = renderWithProviders(<App />, {
+//     container: document.body.appendChild(table),
+//   });
+
+//   const allRows = await screen.findAllByRole('row');
+
+//   await waitFor(() => {
+//     expect(container).toBeInTheDocument();
+//   });
+
+//   await waitFor(() => {
+//     expect(allRows.length).toBe(10);
+//   });
+// });

@@ -77,7 +77,10 @@ function Posts() {
   // }
 
   return (
-    <div className='App'>
+    <div
+      className='App'
+      data-testid='posts-page'
+    >
       {/* <button onClick={fetchPosts}>GET POSTS</button> */}
       <MyButton
         style={{ marginTop: 30 }}

@@ -1,4 +1,4 @@
-import { act, cleanup, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import PostPage from './PostPage';
 import axios from 'axios';
 import { unmountComponentAtNode } from 'react-dom';
