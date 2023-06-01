@@ -1,9 +1,9 @@
-import { act, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 //import { AuthContext } from './context';
 import App from './App';
 import { renderWithProviders } from './utils/test-utils';
-import { server } from './mock/api/server';
-import { rest } from 'msw';
+// import { server } from './mock/api/server';
+// import { rest } from 'msw';
 
 // import { Provider } from 'react-redux'
 // import configureStore from 'redux-mock-store'
