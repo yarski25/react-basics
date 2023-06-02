@@ -4,12 +4,13 @@ import * as uuid from 'uuid';
 import mailService from './mail-service.js';
 import tokenService from './token-service.js';
 import UserDto from '../dtos/user-dto.js';
+import ApiError from '../exceptions/api-error.js';
 
 class UserService {
   async registration(email, password) {
     const candidate = await userSchema.findOne({ email });
     if (candidate) {
-      throw new Error(`User with email ${email} already exists`);
+      throw ApiError.BadRequest(`User with email ${email} already exists`);
     }
     const salt = await bcrypt.genSalt(Number(process.env.HASH_SALT_ROUNDS));
     const hashPassword = await bcrypt.hash(password, salt);
@@ -34,7 +35,7 @@ class UserService {
   async activate(activationLink) {
     const user = await userSchema.findOne({ activationLink });
     if (!user) {
-      throw new Error('activation link incorect');
+      throw ApiError.BadRequest('activation link incorect');
     }
     user.isActivated = true;
     await user.save();
