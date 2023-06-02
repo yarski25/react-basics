@@ -11,5 +11,3 @@ router.get('/refresh', userController.refresh);
 router.get('/users', userController.getUsers);
 
 export default router;
-
-//module.exports = router;

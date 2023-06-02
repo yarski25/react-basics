@@ -11,28 +11,33 @@ class UserService {
     if (candidate) {
       throw new Error(`User with email ${email} already exists`);
     }
-    console.log(password);
-    // const hashPassword = await bcrypt.hash(
-    //   password,
-    //   process.env.HASH_SALT_ROUNDS,
-    //   function (err, hash) {
-    //     console.log(hash);
-    //   },
-    // );
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(Number(process.env.HASH_SALT_ROUNDS));
     const hashPassword = await bcrypt.hash(password, salt);
-    console.log(hashPassword);
+    console.log(`hash generated: ${hashPassword}`);
 
     const activationLink = uuid.v4();
+    console.log(`activation link generated: ${activationLink}`);
 
     const user = await userSchema.create({ email, password: hashPassword, activationLink });
-    await mailService.sendActivationMail(email, activationLink);
+    await mailService.sendActivationMail(
+      email,
+      `${process.env.API_URL}/api/activate/${activationLink}`,
+    );
 
     const userDto = new UserDto(user); // id, email, isActivated
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
     return { ...tokens, user: userDto };
+  }
+
+  async activate(activationLink) {
+    const user = await userSchema.findOne({ activationLink });
+    if (!user) {
+      throw new Error('activation link incorect');
+    }
+    user.isActivated = true;
+    await user.save();
   }
 }
 
