@@ -52,6 +52,24 @@ class UserService {
     return token;
   }
 
+  async refresh(refreshToken) {
+    if (!refreshToken) {
+      throw ApiError.UnauthorizedError();
+    }
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDB = tokenService.findToken(refreshToken);
+    if (!userData || !tokenFromDB) {
+      throw ApiError.UnauthorizedError();
+    }
+
+    const user = await userSchema.findById(userData.id);
+    const userDto = new UserDto(user); // id, email, isActivated
+    const tokens = tokenService.generateTokens({ ...userDto });
+
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    return { ...tokens, user: userDto };
+  }
+
   async activate(activationLink) {
     const user = await userSchema.findOne({ activationLink });
     if (!user) {
@@ -59,6 +77,11 @@ class UserService {
     }
     user.isActivated = true;
     await user.save();
+  }
+
+  async getAllUsers() {
+    const users = await userSchema.find();
+    return users;
   }
 }
 
