@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import MyInput from '../../components/ui/input/MyInput';
 import MyButton from '../../components/ui/button/MyButton';
 import { AuthContext } from '../../context';
+import { useLoginMutation } from '../../api/auth';
 
 type LoginProps = {
   onSubmit?: (form: ILogin) => void;
@@ -15,6 +16,9 @@ interface ILogin {
 const Login = ({ onSubmit }: LoginProps) => {
   const { setIsAuth } = useContext(AuthContext);
   const [form, setForm] = useState<ILogin>({ username: '', password: '' });
+
+  // 👇 API Login Mutation
+  const [loginUser] = useLoginMutation();
 
   const login = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,16 +45,19 @@ const Login = ({ onSubmit }: LoginProps) => {
     //     ' respectively.',
     // );
 
-    if (
-      form.username === process.env.REACT_APP_USERNAME &&
-      form.password === process.env.REACT_APP_PWD
-    ) {
-      setIsAuth(true);
-      localStorage.setItem('auth', 'true');
-      console.log('login success');
-    } else {
-      console.log('login failed');
-    }
+    // if (
+    //   form.username === process.env.REACT_APP_USERNAME &&
+    //   form.password === process.env.REACT_APP_PWD
+    // ) {
+    //   setIsAuth(true);
+    //   localStorage.setItem('auth', 'true');
+    //   console.log('login success');
+    // } else {
+    //   console.log('login failed');
+    // }
+
+    loginUser({ email: form.username, password: form.password });
+    setIsAuth(true);
     onSubmit?.(form);
   };
 

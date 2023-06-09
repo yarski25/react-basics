@@ -1,10 +1,12 @@
 import { $CombinedState, PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/UserSlice';
 import { userAPI } from '../api/UserService';
+import { authAPI } from '../api/auth';
 
 const rootReducer = combineReducers({
   userReducer,
   [userAPI.reducerPath]: userAPI.reducer,
+  [authAPI.reducerPath]: authAPI.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
@@ -14,6 +16,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({ immutableCheck: false, serializableCheck: false }).concat(
         userAPI.middleware,
+        authAPI.middleware,
       ),
   });
 };
