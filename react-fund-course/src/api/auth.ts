@@ -2,7 +2,7 @@ import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { AuthResponse } from '../types/interfaces/response/AuthResponse';
 
-export const API_URL = `http://localhost:3000`;
+export const API_URL = `http://localhost:4000/api`;
 
 // export interface User {
 //   first_name: string;
@@ -19,30 +19,21 @@ export interface LoginRequest {
   password: string;
 }
 
-type prepareHeaders = (
-  headers: Headers,
-  api: {
-    getState: () => unknown;
-    extra: unknown;
-    endpoint: string;
-    type: 'query' | 'mutation';
-    forced: boolean | undefined;
-  },
-) => Headers | void;
+// type prepareHeaders = (
+//   headers: Headers,
+//   api: {
+//     getState: () => unknown;
+//     extra: unknown;
+//     endpoint: string;
+//     type: 'query' | 'mutation';
+//     forced: boolean | undefined;
+//   },
+// ) => Headers | void;
 
 const axiosBaseQuery =
   (
-    { baseUrl }: { baseUrl: string; prepareHeaders?: prepareHeaders } = {
+    { baseUrl }: { baseUrl: string } = {
       baseUrl: '',
-      prepareHeaders: (headers) => {
-        // By default, if we have a token in the store, let's use that for authenticated requests
-        const accessToken = localStorage.getItem('access_token');
-        //params.headers.Authorization = `Bearer ${accessToken}`;
-        if (accessToken) {
-          headers.set('authorization', `Bearer ${accessToken}`);
-        }
-        return headers;
-      },
     },
   ): BaseQueryFn<
     {
@@ -56,6 +47,11 @@ const axiosBaseQuery =
   > =>
   async ({ url, method, data, params }) => {
     try {
+      axios.defaults.withCredentials = true;
+      const accessToken = localStorage.getItem('access_token');
+      if (accessToken) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      }
       const result = await axios({ url: baseUrl + url, method, data, params });
       return { data: result.data };
     } catch (axiosError) {
@@ -78,10 +74,10 @@ export const authAPI = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (credentials) => ({
-        url: 'login',
+        url: '/login',
         method: 'POST',
-        body: credentials,
-        withCredentials: true,
+        data: credentials,
+        //withCredentials: true,
       }),
     }),
   }),
