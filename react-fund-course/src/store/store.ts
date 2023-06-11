@@ -1,7 +1,7 @@
 import { $CombinedState, PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/UserSlice';
 import { userAPI } from '../api/UserService';
-import { authAPI } from '../api/auth';
+import { authAPI } from '../api/AuthService';
 
 const rootReducer = combineReducers({
   userReducer,

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import MyInput from '../../components/ui/input/MyInput';
 import MyButton from '../../components/ui/button/MyButton';
 import { AuthContext } from '../../context';
-import { useLoginMutation } from '../../api/auth';
+import { useLoginMutation } from '../../api/AuthService';
 
 type LoginProps = {
   onSubmit?: (form: ILogin) => void;
