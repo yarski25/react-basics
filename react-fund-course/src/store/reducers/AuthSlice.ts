@@ -1,27 +1,28 @@
-//import { createSlice } from '@reduxjs/toolkit';
-//import { authAPI } from '../../api/auth';
+// export const testFunc = {};
 
-// type AuthState = {
-//   user: User | null;
-//   token: string | null;
-// };
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AuthResponse } from '../../types/interfaces/response/AuthResponse';
 
-export const test = function () {
-  console.log('TO DO');
+// interface LoginState extends AuthResponse {
+//   isLogging: boolean;
+//   error: string;
+// }
+
+const initialState: AuthResponse = {
+  user: { id: '', email: '', isActivated: false },
 };
 
-// export const authSlice = createSlice({
-//   name: 'auth',
-//   //initialState: { user: null, token: null } as AuthState,
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder.addMatcher(authAPI.endpoints.login.matchFulfilled, (state, { payload }) => {
-//       state.token = payload.token;
-//       state.user = payload.user;
-//     });
-//   },
-// });
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    setCredentials: (state, action: PayloadAction<AuthResponse>) => {
+      state.user = action.payload.user;
+    },
+  },
+  // extraReducers: (builder) => {},
+});
 
-// export default authSlice.reducer;
+export const { setCredentials } = authSlice.actions;
 
-//export const selectCurrentUser = (state: RootState) => state.auth.user
+export default authSlice.reducer;

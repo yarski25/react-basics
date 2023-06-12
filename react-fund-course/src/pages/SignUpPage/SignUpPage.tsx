@@ -2,11 +2,11 @@ import React, { useContext, useState } from 'react';
 import MyInput from '../../components/ui/input/MyInput';
 import MyButton from '../../components/ui/button/MyButton';
 import { AuthContext } from '../../context';
-import { useLoginMutation } from '../../api/AuthService';
+import { useRegistrationMutation } from '../../api/AuthService';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../store/reducers/AuthSlice';
 
-type LoginProps = {
+type SignUpProps = {
   onSubmit?: (form: ILogin) => void;
 };
 
@@ -15,52 +15,19 @@ interface ILogin {
   password: string;
 }
 
-const Login = ({ onSubmit }: LoginProps) => {
+const SignUpPage = ({ onSubmit }: SignUpProps) => {
   const { setIsAuth } = useContext(AuthContext);
   const [form, setForm] = useState<ILogin>({ username: '', password: '' });
 
   const dispatch = useDispatch();
 
-  // 👇 API Login Mutation
-  const [loginUser] = useLoginMutation();
+  // 👇 Auth API Mutation
+  const [registrationUser] = useRegistrationMutation();
 
-  const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
-    // password rules
-    // Must contain at least one digit (0-9).
-    // Must contain at least one letter (a-z or A-Z).
-    // Must contain at least one special character (!@#$%^&*).
-    // Must be between 8 and 20 characters long.
-    // Only allowed characters are letters (a-z or A-Z), digits (0-9), and special characters (!@#$%^&*).
-
-    // const passwordPattern = /^(?=.*[a-zA-Z])$/;
-    // //const passwordPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
-    // if (!passwordPattern.test(form.password)) {
-    //   //console.log("Password requirements: 8-20 characters, 1 number, 1 letter, 1 symbol.");
-    //   console.log('Password requirements: 1 letter.');
-    //   return;
-    // }
-    // alert(
-    //   'The username and password are ' +
-    //     form.username +
-    //     ' and ' +
-    //     form.password +
-    //     ' respectively.',
-    // );
-
-    // if (
-    //   form.username === process.env.REACT_APP_USERNAME &&
-    //   form.password === process.env.REACT_APP_PWD
-    // ) {
-    //   setIsAuth(true);
-    //   localStorage.setItem('auth', 'true');
-    //   console.log('login success');
-    // } else {
-    //   console.log('login failed');
-    // }
-
+  const handleRegistration = async (e: React.ChangeEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      await loginUser({ email: form.username, password: form.password })
+      await registrationUser({ email: form.username, password: form.password })
         .unwrap()
         .then((response) => {
           if (response.accessToken) localStorage.setItem('token', response.accessToken);
@@ -87,11 +54,11 @@ const Login = ({ onSubmit }: LoginProps) => {
 
   return (
     <div>
-      <h1>Login page</h1>
+      <h1>Sign Up page</h1>
       <form
-        data-testid='login-form'
+        data-testid='signnup-form'
         action=''
-        onSubmit={handleLogin}
+        onSubmit={handleRegistration}
       >
         <MyInput
           data-testid='username-input'
@@ -107,10 +74,10 @@ const Login = ({ onSubmit }: LoginProps) => {
           value={form.password}
           onChange={handlePassword}
         />
-        <MyButton data-testid='login-button'>Login</MyButton>
+        <MyButton data-testid='signnup-button'>Sign Up</MyButton>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default SignUpPage;

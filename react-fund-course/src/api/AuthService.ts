@@ -39,8 +39,13 @@ export const authAPI = createApi({
         method: 'POST',
         data: credentials,
       }),
+      // // Pick out data and prevent nested properties in a hook or selector
+      // transformResponse: (response: { data: AuthResponse }) => response.data,
+      // // Pick out errors and prevent nested properties in a hook or selector
+      // transformErrorResponse: (response: { status: string | number }) => response.status,
+      // invalidatesTags: ['Auth'],
     }),
-    logout: builder.mutation<AuthResponse, null>({
+    logout: builder.mutation({
       query: () => ({
         url: '/logout',
         method: 'POST',
@@ -49,4 +54,4 @@ export const authAPI = createApi({
   }),
 });
 
-export const { useLoginMutation } = authAPI;
+export const { useLoginMutation, useRegistrationMutation, useLogoutMutation } = authAPI;

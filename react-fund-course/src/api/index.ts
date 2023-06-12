@@ -46,7 +46,8 @@ const axiosBaseQuery =
               const response = await axios.get<AuthResponse>(`${baseUrl}/refresh`, {
                 withCredentials: true,
               });
-              localStorage.setItem('token', response.data.accessToken);
+              if (response.data.accessToken)
+                localStorage.setItem('token', response.data.accessToken);
               return axios.request(originalRequest);
             } catch (e) {
               console.log('not authorized');

@@ -6,6 +6,7 @@ import PostPage from '../pages/PostPage/PostPage';
 import Login from '../pages/Login/Login';
 import { AuthContext } from '../context';
 import MyLoader from './ui/loader/MyLoader';
+import SignUpPage from '../pages/SignUpPage/SignUpPage';
 
 const AppRouter = () => {
   const { isAuth, isLoading } = useContext(AuthContext);
@@ -15,6 +16,10 @@ const AppRouter = () => {
   }
   return isAuth ? (
     <Routes>
+      <Route
+        path='/signup'
+        element={<SignUpPage />}
+      />
       <Route
         path='/login'
         element={<Login />}
@@ -38,6 +43,10 @@ const AppRouter = () => {
     </Routes>
   ) : (
     <Routes>
+      <Route
+        path='/signup'
+        element={<SignUpPage />}
+      />
       <Route
         path='/login'
         element={<Login />}
