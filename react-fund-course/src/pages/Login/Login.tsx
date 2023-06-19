@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import MyInput from '../../components/ui/input/MyInput';
 import MyButton from '../../components/ui/button/MyButton';
-import { AuthContext } from '../../context';
+//import { AuthContext } from '../../context';
 import { useLoginMutation } from '../../api/AuthService';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../store/reducers/AuthSlice';
@@ -16,7 +16,7 @@ interface ILogin {
 }
 
 const Login = ({ onSubmit }: LoginProps) => {
-  const { setIsAuth } = useContext(AuthContext);
+  // const { setIsAuth } = useContext(AuthContext);
   const [form, setForm] = useState<ILogin>({ username: '', password: '' });
 
   const dispatch = useDispatch();
@@ -63,9 +63,11 @@ const Login = ({ onSubmit }: LoginProps) => {
       await loginUser({ email: form.username, password: form.password })
         .unwrap()
         .then((response) => {
-          if (response.accessToken) localStorage.setItem('token', response.accessToken);
-          setIsAuth(true);
-          dispatch(setCredentials(response));
+          if (response.accessToken) {
+            //localStorage.setItem('token', response.accessToken);
+            dispatch(setCredentials(response));
+          }
+          //setIsAuth(true);
           onSubmit?.(form);
           console.log(response);
         })

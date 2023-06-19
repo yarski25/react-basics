@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
 import './App.scss';
 import { BrowserRouter } from 'react-router-dom';
 import MyNavbar from './components/ui/navbar/MyNavbar';
 import AppRouter from './components/AppRouter';
-import { AuthContext } from './context';
+//import { AuthContext } from './context';
 import UsersList from './components/UsersList';
 
 function App() {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  //const [isAuth, setIsAuth] = useState<boolean>(false);
+  //const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // const dispatch = useAppDispatch();
   // const { users, isUsersLoading, error } = useAppSelector(
@@ -19,24 +19,24 @@ function App() {
   //   dispatch(fetchUsers());
   // }, []);
 
-  useEffect(() => {
-    if (localStorage.getItem('auth')) {
-      setIsAuth(true);
-    }
-    setIsLoading(false);
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem('token')) {
+  //     setIsAuth(true);
+  //   }
+  //   setIsLoading(false);
+  // }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuth, setIsAuth, isLoading }}>
-      <BrowserRouter>
-        <MyNavbar />
-        {/* {isUsersLoading && <h1>Loading...</h1>}
+    // <AuthContext.Provider value={{ isAuth, setIsAuth, isLoading }}>
+    <BrowserRouter>
+      <MyNavbar />
+      {/* {isUsersLoading && <h1>Loading...</h1>}
         {error && <h1>{error}</h1>}
         {JSON.stringify(users, null, 2)} */}
-        <UsersList />
-        <AppRouter />
-      </BrowserRouter>
-    </AuthContext.Provider>
+      <UsersList />
+      <AppRouter />
+    </BrowserRouter>
+    // </AuthContext.Provider>
   );
 }
 

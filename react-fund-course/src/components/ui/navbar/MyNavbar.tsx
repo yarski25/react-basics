@@ -1,14 +1,14 @@
-import { useContext } from 'react';
+//import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import MyButton from '../button/MyButton';
-import { AuthContext } from '../../../context';
+//import { AuthContext } from '../../../context';
 import { useLogoutMutation } from '../../../api/AuthService';
 import { setCredentials } from '../../../store/reducers/AuthSlice';
 import { AuthResponse } from '../../../types/interfaces/response/AuthResponse';
 import { useDispatch } from 'react-redux';
 
 const MyNavbar = () => {
-  const { setIsAuth } = useContext(AuthContext);
+  //const { setIsAuth } = useContext(AuthContext);
 
   const dispatch = useDispatch();
 
@@ -21,8 +21,8 @@ const MyNavbar = () => {
       await logoutUser({})
         .unwrap()
         .then((response) => {
-          if (response) localStorage.removeItem('token');
-          setIsAuth(false);
+          //if (response) localStorage.removeItem('token');
+          //setIsAuth(false);
           localStorage.removeItem('auth');
           dispatch(setCredentials({} as AuthResponse));
           console.log(response);

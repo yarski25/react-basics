@@ -1,15 +1,17 @@
-import { useContext } from 'react';
+//import { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import About from '../pages/About/About';
 import Posts from '../pages/Posts/Posts';
 import PostPage from '../pages/PostPage/PostPage';
 import Login from '../pages/Login/Login';
-import { AuthContext } from '../context';
+//import { AuthContext } from '../context';
 import MyLoader from './ui/loader/MyLoader';
 import SignUpPage from '../pages/SignUpPage/SignUpPage';
 
 const AppRouter = () => {
-  const { isAuth, isLoading } = useContext(AuthContext);
+  //const { isAuth, isLoading } = useContext(AuthContext);
+  const isAuth = true;
+  const isLoading = false;
 
   if (isLoading) {
     return <MyLoader />;
