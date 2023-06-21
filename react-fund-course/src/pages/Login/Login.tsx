@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import MyInput from '../../components/ui/input/MyInput';
 import MyButton from '../../components/ui/button/MyButton';
 //import { AuthContext } from '../../context';
-import { useLoginMutation } from '../../api/AuthService';
+//import { useLoginMutation } from '../../api/AuthService';
 import { useDispatch } from 'react-redux';
-import { setCredentials } from '../../store/reducers/AuthSlice';
+import { login } from '../../store/reducers/ActionCreators';
+import { AppDispatch } from '../../store/store';
+//import { setCredentials } from '../../store/reducers/AuthSlice';
 
 type LoginProps = {
   onSubmit?: (form: ILogin) => void;
@@ -19,10 +21,10 @@ const Login = ({ onSubmit }: LoginProps) => {
   // const { setIsAuth } = useContext(AuthContext);
   const [form, setForm] = useState<ILogin>({ username: '', password: '' });
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   // 👇 API Login Mutation
-  const [loginUser] = useLoginMutation();
+  //const [loginUser] = useLoginMutation();
 
   const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     // password rules
@@ -60,20 +62,45 @@ const Login = ({ onSubmit }: LoginProps) => {
 
     try {
       e.preventDefault();
-      await loginUser({ email: form.username, password: form.password })
-        .unwrap()
-        .then((response) => {
-          if (response.accessToken) {
-            //localStorage.setItem('token', response.accessToken);
-            dispatch(setCredentials(response));
-          }
-          //setIsAuth(true);
-          onSubmit?.(form);
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      dispatch(login({ email: form.username, password: form.password }));
+      onSubmit?.(form);
+      // dispatch(login({ email: form.username, password: form.password }))
+      //   .unwrap()
+      //   .then((response) => {
+      //     onSubmit?.(form);
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+      // dispatch(loginUser({ form.username, form.password }))
+      //   .unwrap()
+      //   .then((response) => {
+      //     if (response.accessToken) {
+      //       localStorage.setItem('token', response.accessToken);
+      //       //dispatch(setCredentials(response));
+      //     }
+      //     //setIsAuth(true);
+      //     onSubmit?.(form);
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+      // await loginUser({ email: form.username, password: form.password })
+      //   .unwrap()
+      //   .then((response) => {
+      //     if (response.accessToken) {
+      //       localStorage.setItem('token', response.accessToken);
+      //       //dispatch(setCredentials(response));
+      //     }
+      //     //setIsAuth(true);
+      //     onSubmit?.(form);
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     } catch (e) {
       console.log((e as Error).message);
     }

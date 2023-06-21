@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import MyButton from '../button/MyButton';
 //import { AuthContext } from '../../../context';
 import { useLogoutMutation } from '../../../api/AuthService';
-import { setCredentials } from '../../../store/reducers/AuthSlice';
-import { AuthResponse } from '../../../types/interfaces/response/AuthResponse';
+import { AuthState, setCredentials } from '../../../store/reducers/AuthSlice';
+//import { AuthResponse } from '../../../types/interfaces/response/AuthResponse';
 import { useDispatch } from 'react-redux';
 
 const MyNavbar = () => {
@@ -24,7 +24,7 @@ const MyNavbar = () => {
           //if (response) localStorage.removeItem('token');
           //setIsAuth(false);
           localStorage.removeItem('auth');
-          dispatch(setCredentials({} as AuthResponse));
+          dispatch(setCredentials({} as AuthState));
           console.log(response);
         })
         .catch((error) => {

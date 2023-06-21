@@ -7,17 +7,18 @@ import {
   configureStore,
 } from '@reduxjs/toolkit';
 import userReducer from './reducers/UserSlice';
-import auth from './reducers/AuthSlice';
+//import auth from './reducers/AuthSlice';
+import authReducer from './reducers/AuthSlice';
 import { userAPI } from '../api/UserService';
 import { authAPI } from '../api/AuthService';
 import { TypedUseSelectorHook } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 const rootReducer: Reducer = combineReducers({
-  userReducer,
+  user: userReducer,
   [userAPI.reducerPath]: userAPI.reducer,
   [authAPI.reducerPath]: authAPI.reducer,
-  auth,
+  auth: authReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
