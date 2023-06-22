@@ -23,9 +23,6 @@ const Login = ({ onSubmit }: LoginProps) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  // 👇 API Login Mutation
-  //const [loginUser] = useLoginMutation();
-
   const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     // password rules
     // Must contain at least one digit (0-9).
@@ -64,43 +61,6 @@ const Login = ({ onSubmit }: LoginProps) => {
       e.preventDefault();
       dispatch(login({ email: form.username, password: form.password }));
       onSubmit?.(form);
-      // dispatch(login({ email: form.username, password: form.password }))
-      //   .unwrap()
-      //   .then((response) => {
-      //     onSubmit?.(form);
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-      // dispatch(loginUser({ form.username, form.password }))
-      //   .unwrap()
-      //   .then((response) => {
-      //     if (response.accessToken) {
-      //       localStorage.setItem('token', response.accessToken);
-      //       //dispatch(setCredentials(response));
-      //     }
-      //     //setIsAuth(true);
-      //     onSubmit?.(form);
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-      // await loginUser({ email: form.username, password: form.password })
-      //   .unwrap()
-      //   .then((response) => {
-      //     if (response.accessToken) {
-      //       localStorage.setItem('token', response.accessToken);
-      //       //dispatch(setCredentials(response));
-      //     }
-      //     //setIsAuth(true);
-      //     onSubmit?.(form);
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
     } catch (e) {
       console.log((e as Error).message);
     }

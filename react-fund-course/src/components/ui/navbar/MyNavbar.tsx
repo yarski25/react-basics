@@ -2,34 +2,24 @@
 import { Link, useNavigate } from 'react-router-dom';
 import MyButton from '../button/MyButton';
 //import { AuthContext } from '../../../context';
-import { useLogoutMutation } from '../../../api/AuthService';
-import { AuthState, setCredentials } from '../../../store/reducers/AuthSlice';
+//import { useLogoutMutation } from '../../../api/AuthService';
 //import { AuthResponse } from '../../../types/interfaces/response/AuthResponse';
 import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../store/store';
+import { logout } from '../../../store/reducers/ActionCreators';
 
 const MyNavbar = () => {
   //const { setIsAuth } = useContext(AuthContext);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const [logoutUser] = useLogoutMutation();
+  //const [logoutUser] = useLogoutMutation();
 
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await logoutUser({})
-        .unwrap()
-        .then((response) => {
-          //if (response) localStorage.removeItem('token');
-          //setIsAuth(false);
-          localStorage.removeItem('auth');
-          dispatch(setCredentials({} as AuthState));
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      dispatch(logout());
     } catch (e) {
       console.log((e as Error).message);
     }
