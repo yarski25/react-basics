@@ -10,7 +10,8 @@ import { AppDispatch } from './store/store';
 import { checkAuth } from './store/reducers/ActionCreators';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectAuth, selectUser } from './store/reducers/AuthSlice';
+import { selectAuth, selectLoading, selectUser } from './store/reducers/AuthSlice';
+import MyLoader from './components/ui/loader/MyLoader';
 
 function App() {
   //const [isAuth, setIsAuth] = useState<boolean>(false);
@@ -20,6 +21,10 @@ function App() {
   // const { users, isUsersLoading, error } = useAppSelector(
   //   (state) => state.userReducer,
   // );
+
+  const isAuth = useSelector(selectAuth);
+  const isLoading = useSelector(selectLoading);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -35,13 +40,15 @@ function App() {
   //   setIsLoading(false);
   // }, []);
 
-  const isAuth = useSelector(selectAuth);
-  const user = useSelector(selectUser);
-
   return (
     // <AuthContext.Provider value={{ isAuth, setIsAuth, isLoading }}>
     <BrowserRouter>
-      <h1>{isAuth ? `User is authorized ${user.email}` : `Authorize please...`}</h1>
+      {isLoading ? (
+        <MyLoader />
+      ) : (
+        <h1>{isAuth ? `User is authorized ${user}` : `Authorize please...`}</h1>
+      )}
+
       <MyNavbar />
       {/* {isUsersLoading && <h1>Loading...</h1>}
         {error && <h1>{error}</h1>}

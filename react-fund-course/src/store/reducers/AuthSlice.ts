@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthResponse } from '../../types/interfaces/response/AuthResponse';
 import { RootState } from '../store';
 import { checkAuth, login, logout, registration } from './ActionCreators';
+import { UserDTO } from '../../types/interfaces/response/UserDTO';
 //import { useContext } from 'react';
 //import { AuthContext } from '../../context';
 
@@ -14,9 +15,9 @@ export interface AuthState extends AuthResponse {
 }
 
 //const { setIsAuth } = useContext(AuthContext);
-
+// user: {id: '', email: '', isActivated: false }
 const initialState: AuthState = {
-  user: { id: '', email: '', isActivated: false },
+  user: {} as UserDTO,
   isAuth: false,
   isLoading: false,
   isError: '',
@@ -96,6 +97,8 @@ export const { setCredentials } = authSlice.actions;
 
 export default authSlice.reducer;
 
-export const selectUser = (state: RootState) => state.auth.user;
+export const selectUser = (state: RootState) => state.auth.user.email;
 
 export const selectAuth = (state: RootState) => state.auth.isAuth;
+
+export const selectLoading = (state: RootState) => state.auth.isLoading;

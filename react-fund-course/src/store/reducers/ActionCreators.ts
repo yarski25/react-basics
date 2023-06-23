@@ -43,7 +43,7 @@ export const registration = createAsyncThunk(
       if (response.data.accessToken) {
         localStorage.setItem('token', response.data.accessToken);
       }
-      return response;
+      return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(`User with email ${email} is not registered`);
     }
@@ -58,7 +58,7 @@ export const login = createAsyncThunk(
       if (response.data.accessToken) {
         localStorage.setItem('token', response.data.accessToken);
       }
-      return response;
+      return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(`User with email ${email} is not logged in`);
     }
@@ -78,7 +78,6 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 export const checkAuth = createAsyncThunk('auth/checkAuth', async (_, thunkAPI) => {
   try {
     const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true });
-    console.log(response.data);
     if (response.data.accessToken) localStorage.setItem('token', response.data.accessToken);
     return response.data;
   } catch (e) {
