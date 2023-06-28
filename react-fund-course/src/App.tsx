@@ -12,6 +12,8 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectAuth, selectLoading, selectUser } from './store/reducers/AuthSlice';
 import MyLoader from './components/ui/loader/MyLoader';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   //const [isAuth, setIsAuth] = useState<boolean>(false);
@@ -28,7 +30,6 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      console.log('useEffect called');
       dispatch(checkAuth());
     }
   }, []);
@@ -40,6 +41,8 @@ function App() {
   //   setIsLoading(false);
   // }, []);
 
+  const notify = () => toast('Wow so easy!');
+
   return (
     // <AuthContext.Provider value={{ isAuth, setIsAuth, isLoading }}>
     <BrowserRouter>
@@ -48,7 +51,8 @@ function App() {
       ) : (
         <h1>{isAuth ? `User is authorized ${user}` : `Authorize please...`}</h1>
       )}
-
+      <button onClick={notify}>Notify</button>
+      <ToastContainer />
       <MyNavbar />
       {/* {isUsersLoading && <h1>Loading...</h1>}
         {error && <h1>{error}</h1>}

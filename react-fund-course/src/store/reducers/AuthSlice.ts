@@ -77,10 +77,11 @@ export const authSlice = createSlice({
         state.isAuth = true;
         state.isError = action.payload;
       })
-      .addCase(checkAuth.fulfilled.type, (state) => {
+      .addCase(checkAuth.fulfilled.type, (state, action: PayloadAction<AuthResponse>) => {
         state.isLoading = false;
         state.isError = '';
         state.isAuth = true;
+        state.user = action.payload.user;
       })
       .addCase(checkAuth.pending.type, (state) => {
         state.isLoading = true;
