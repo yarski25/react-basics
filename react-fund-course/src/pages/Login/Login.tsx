@@ -75,8 +75,8 @@ const Login = ({ onSubmit }: LoginProps) => {
   };
 
   return (
-    <div>
-      <h1>Login page</h1>
+    <div className='form'>
+      <h1>Login</h1>
       <form
         data-testid='login-form'
         action=''
@@ -96,7 +96,12 @@ const Login = ({ onSubmit }: LoginProps) => {
           value={form.password}
           onChange={handlePassword}
         />
-        <MyButton data-testid='login-button'>Login</MyButton>
+        <MyButton
+          data-testid='login-button'
+          style={{ width: '100%', backgroundColor: 'teal', color: 'white', marginTop: '1em' }}
+        >
+          Log in
+        </MyButton>
       </form>
     </div>
   );

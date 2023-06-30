@@ -7,11 +7,16 @@ import Login from '../pages/Login/Login';
 //import { AuthContext } from '../context';
 import MyLoader from './ui/loader/MyLoader';
 import SignUpPage from '../pages/SignUpPage/SignUpPage';
+import { selectAuth, selectLoading } from '../store/reducers/AuthSlice';
+import { useSelector } from 'react-redux';
 
 const AppRouter = () => {
   //const { isAuth, isLoading } = useContext(AuthContext);
-  const isAuth = true;
-  const isLoading = false;
+
+  const isAuth = useSelector(selectAuth);
+  const isLoading = useSelector(selectLoading);
+  //const isAuth = true;
+  //const isLoading = false;
 
   if (isLoading) {
     return <MyLoader />;
@@ -21,10 +26,6 @@ const AppRouter = () => {
       <Route
         path='/signup'
         element={<SignUpPage />}
-      />
-      <Route
-        path='/login'
-        element={<Login />}
       />
       <Route
         path='/about'

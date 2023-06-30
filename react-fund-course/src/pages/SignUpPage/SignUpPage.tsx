@@ -73,8 +73,8 @@ const SignUpPage = ({ onSubmit }: SignUpProps) => {
   };
 
   return (
-    <div>
-      <h1>Sign Up page</h1>
+    <div className='form'>
+      <h1>Sign Up</h1>
       <form
         data-testid='signnup-form'
         action=''
@@ -102,7 +102,12 @@ const SignUpPage = ({ onSubmit }: SignUpProps) => {
           onChange={handleConfirmPassword}
           onPaste={handlePaste}
         />
-        <MyButton data-testid='signnup-button'>Sign Up</MyButton>
+        <MyButton
+          data-testid='signnup-button'
+          style={{ width: '100%', backgroundColor: 'teal', color: 'white', marginTop: '1em' }}
+        >
+          Sign Up
+        </MyButton>
       </form>
     </div>
   );

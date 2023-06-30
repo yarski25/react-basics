@@ -7,6 +7,8 @@ import MyButton from '../button/MyButton';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store/store';
 import { logout } from '../../../store/reducers/ActionCreators';
+import { selectAuth } from '../../../store/reducers/AuthSlice';
+import { useSelector } from 'react-redux';
 
 const MyNavbar = () => {
   //const { setIsAuth } = useContext(AuthContext);
@@ -14,6 +16,8 @@ const MyNavbar = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   //const [logoutUser] = useLogoutMutation();
+
+  const isAuth = useSelector(selectAuth);
 
   const navigate = useNavigate();
 
@@ -29,10 +33,12 @@ const MyNavbar = () => {
     navigate('/signup');
   };
 
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
   return (
     <div className='navbar'>
-      <MyButton onClick={handleSignup}>Sign Up</MyButton>
-      <MyButton onClick={handleLogout}>Logout</MyButton>
       <div className='navbar__links'>
         <Link
           to='/about'
@@ -47,6 +53,35 @@ const MyNavbar = () => {
           Posts
         </Link>
       </div>
+      <MyButton
+        onClick={handleSignup}
+        style={{
+          backgroundColor: 'rgba(0, 128, 128, 1.0)',
+          color: 'white',
+          borderRadius: '0.8em',
+        }}
+      >
+        Sign Up
+      </MyButton>
+      {isAuth ? (
+        <MyButton
+          onClick={handleLogout}
+          style={{ borderRadius: '0.8em' }}
+        >
+          Logout
+        </MyButton>
+      ) : (
+        <MyButton
+          onClick={handleLogin}
+          style={{
+            backgroundColor: 'rgba(0, 128, 128, 0.5)',
+            color: 'white',
+            borderRadius: '0.8em',
+          }}
+        >
+          Login
+        </MyButton>
+      )}
     </div>
   );
 };

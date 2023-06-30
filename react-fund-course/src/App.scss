@@ -1,73 +1,83 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 #root {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
 }
 
-.App{
-    width: 800px;
+.App {
+  width: 800px;
 }
 
 .post {
-    display: flex;
-    padding: 1em;
-    border: 2px solid teal;
-    margin-top: 1em;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  padding: 1em;
+  border: 2px solid teal;
+  margin-top: 1em;
+  justify-content: space-between;
+  align-items: center;
 
-    &__btns{
-        display: flex;
-    }
+  &__btns {
+    display: flex;
+  }
 }
 
 .post-enter {
-    transform: translateX(-350px);
+  transform: translateX(-350px);
 }
 .post-enter-active {
-    transform: translateX(0px);
-    transition: all 500ms ease-in;
+  transform: translateX(0px);
+  transition: all 500ms ease-in;
 }
 .post-exit {
-    transform: translateX(0px);
+  transform: translateX(0px);
 }
 .post-exit-active {
-    transform: translateX(-350px);
-    transition: all 500ms ease-in;
+  transform: translateX(-350px);
+  transition: all 500ms ease-in;
 }
 
-.page{
-    margin-top: 30px;
-    display: flex;
+.page {
+  margin-top: 30px;
+  display: flex;
 
-    &__item{
-        padding: 10px;
-        border: 1px solid teal;
-        cursor: pointer;
-    }
+  &__item {
+    padding: 10px;
+    border: 1px solid teal;
+    cursor: pointer;
+  }
 
-    &__item-current{
-        border: 2px solid orange;
-        font-weight: bold;
-    }
+  &__item-current {
+    border: 2px solid orange;
+    font-weight: bold;
+  }
 }
 
-.navbar{
-    height: 50px;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    background: lightgray;
+.navbar {
+  height: 50px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  //   background: #167d7f81;
+  background: rgba(0, 128, 128, 0.25);
 
-    &__links{
-        margin-left: auto;
-    }
+  &__links {
+    margin-right: auto;
+  }
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+  padding: 1em 1em;
+  border: 2px solid teal;
+}
