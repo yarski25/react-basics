@@ -17,7 +17,12 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li>
+        <a href="#usage">Usage</a>
+        <ul>
+            <li><a href="#authorization">Authorization</a></li>
+        </ul>
+    </li>
   </ol>
 </details>
 
@@ -104,6 +109,19 @@ Another frameworks/libraries used in project:
 5. Enjoy full stack app :smile:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
+
+### Authorization
+
+Authentication & authorization workflow:
+
+1. Client authentication is processed via login and password.
+2. In case of authentication success server returns access and refresh tokens to the client.
+3. The next communication between server and client is processed with access token in header.
+   Server validates access token on each request and if valid allows client to get requested resources.
+4. In case of invalid access token client sends refresh token to the server to get new pair of tokens.
+5. In case of invalid refresh token client must process authentication via login and password again.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
