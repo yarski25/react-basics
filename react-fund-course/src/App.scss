@@ -64,12 +64,34 @@
   width: 100vw;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 10px 15px;
   //   background: #167d7f81;
   background: rgba(0, 128, 128, 0.25);
 
   &__links {
-    margin-right: auto;
+    width: 50%;
+    display: flex;
+
+    .active {
+      border-bottom: 2px solid black;
+    }
+
+    a {
+      color: black;
+      text-decoration: none;
+      font-size: 1.2rem;
+      margin: 0 10px;
+    }
+
+    a:hover {
+      //font-weight: bold;
+      text-shadow: 1px 0;
+    }
+  }
+
+  &__auth {
+    //margin-left: auto;
   }
 }
 
