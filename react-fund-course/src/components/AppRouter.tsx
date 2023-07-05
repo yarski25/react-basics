@@ -9,6 +9,7 @@ import MyLoader from './ui/loader/MyLoader';
 import SignUpPage from '../pages/SignUpPage/SignUpPage';
 import { selectAuth, selectLoading } from '../store/reducers/AuthSlice';
 import { useSelector } from 'react-redux';
+import Widgets from '../pages/Widgets/Widgets';
 
 const AppRouter = () => {
   //const { isAuth, isLoading } = useContext(AuthContext);
@@ -34,6 +35,10 @@ const AppRouter = () => {
       <Route
         path='/posts'
         element={<Posts />}
+      />
+      <Route
+        path='/widgets'
+        element={<Widgets />}
       />
       <Route
         path='/posts/:id'

@@ -68,6 +68,12 @@ const MyNavbar = () => {
         >
           Posts
         </MyLink>
+        <MyLink
+          to='/widgets'
+          data-testid='widgets-link'
+        >
+          Widgets
+        </MyLink>
 
         {/* <Link
           to='/about'

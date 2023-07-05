@@ -103,3 +103,9 @@
   padding: 1em 1em;
   border: 2px solid teal;
 }
+
+.widgets {
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+}
